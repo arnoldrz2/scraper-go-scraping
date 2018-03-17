@@ -3,7 +3,7 @@ var mongoose = require("mongoose");
 // Save a reference to the Schema constructor
 var Schema = mongoose.Schema;
 
-// Using the Schema constructor, this will create a new UserSchema object
+// Using the Schema constructor, this will create a new Schema object
 var HeadlineSchema = new Schema({
     title: {
         type: String,
@@ -16,6 +16,10 @@ var HeadlineSchema = new Schema({
     link: {
         type: String,
         required: true
+    },
+    note: {
+        type: Schema.Types.ObjectId,
+        ref: "Note"
     }
 });
 
