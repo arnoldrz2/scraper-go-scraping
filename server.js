@@ -4,11 +4,18 @@ var bodyParser = require('body-parser')
 var logger = require("morgan");
 var mongoose = require("mongoose");
 
+// Requiring Note and Headline models
+// var Note = require("./models/Note.js");
+// var Headline = require("./models/Headline.js");
+
 // Our scraping tool
+var request = require("request");
 var cheerio = require("cheerio");
 
 // Require all models
 var db = require("./models");
+
+// Scrapping
 
 var PORT = process.env.PORT || 3000;
 
@@ -43,25 +50,19 @@ mongoose.connect(MONGODB_URI, {
 // A GET route for scraping the echojs website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with request
-  axios.get("https://www.npr.org/sections/news/").then(function(response) {
+  request("https://www.npr.org/sections/news/").then(function(error, response, html) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
-    var $ = cheerio.load(response.data);
+    var $ = cheerio.load(html);
 
     // Now, we grab every article, and do the following:
-    $("article h2").each(function(i, element) {
+    $("article").each(function(i, element) {
       // Save an empty result object
       var result = {};
 
       // Add the text and href of every link, and save them as properties of the result object
-      result.title = $(this)
-        .children("a")
-        .text();
-      result.link = $(this)
-        .children("a")
-        .attr("href");
-      result.summary = $(this)
-        .children("")
-        .text();
+      result.title = $(this).children(".item-info").children("h2").text();
+      result.link = $(this).children(".item-info").children("h2").attr("href");
+      result.summary = $(this).children(".item-info").children("p").children("a").text();
 
       // Create a new Article using the `result` object built from scraping
       db.Article.create(result)
