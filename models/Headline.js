@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-var Note = require("./Note")
+var Note = require("./Note");
 
 // Save a reference to the Schema constructor
 var Schema = mongoose.Schema;
@@ -8,19 +8,16 @@ var Schema = mongoose.Schema;
 var HeadlineSchema = new Schema({
     title: {
         type: String,
-        required: true 
-    },
-    summary: {
-        type: String,
-        required: true
+        required: true,
+        unique: true
     },
     link: {
         type: String,
         required: true
     },
-    saved: {
+    summary: {
         type: String,
-        default: false
+        required: true
     },
     note: {
         type: Schema.Types.ObjectId,
