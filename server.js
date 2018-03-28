@@ -27,7 +27,7 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scrapergsdb";
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI, {
-  useMongoClient: true
+  // useMongoClient: true
 });
 
 // Create mongoose db connection variable
@@ -44,7 +44,7 @@ db.once("open", function () {
 });
 
 // Require routes from Headlines.js file in controllers folder
-require("./controller/headline.js")(app);
+require("./controllers/headline.js")(app);
 
 // Listen of Port 3000 and let us know we're connected
 app.listen(PORT, function() {

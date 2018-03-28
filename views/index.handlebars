@@ -1,0 +1,28 @@
+<div class="container">
+
+    <div id="wrapper">
+        <h1>Scraper Go Scraping</h1>
+        <h2><i>Check out the scrapped stuff below. Feel free to add notes!</i></h2>
+        <a class="waves-effect waves-light btn-large" href="/scrape">Scrape!</a>
+
+        {{#each result}}
+
+        <div>
+            <a href="{{this.link}}">
+                <h4>{{this.title}}</h4>
+            </a>
+        </div>
+
+        <div>
+            <a href="{{this.link}}">
+                <p>{{this.summary}}</p>
+            </a>
+            <br>
+            <a href="/headlines/{{this._id}}" class="waves-effect waves-light btn-large">Note</a>
+        </div>
+    </div>
+    <br>
+    <br> {{/each}}
+
+</div>
+
