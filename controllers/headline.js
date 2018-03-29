@@ -102,26 +102,4 @@ app.get("/scrape", function(req, res) {
     });
   });
 
-  app.delete("/headlines/:id/:commentid", function(req, res) {
-    Comment.findByIdAndRemove(req.params.commentid, function(error, doc){
-      if (error) {
-        console.log(error);
-      } else {
-        console.log(doc);
-        Headline.findOneAndUpdate({
-          "_id": req.params.id
-        }, {
-          $pull: {
-            "note": doc._id
-          }
-        })
-        .exec(function (err, doc) {
-          if (err) {
-            console.log(err);
-          }
-        });
-      }
-    });
-  });
-
 };
