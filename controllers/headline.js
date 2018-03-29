@@ -68,7 +68,7 @@ app.get("/scrape", function(req, res) {
         if (error) {
           console.log(error);
         } else {
-          res.render("comments", {result: doc});
+          res.render("saved", {result: doc});
         }
       });
   });
@@ -84,7 +84,7 @@ app.get("/scrape", function(req, res) {
           "_id": req.params.id
         }, {
           $push: {
-            "comment": doc._id
+            "note": doc._id
           }
         }, {
           safe: true,
@@ -112,7 +112,7 @@ app.get("/scrape", function(req, res) {
           "_id": req.params.id
         }, {
           $pull: {
-            "comment": doc._id
+            "note": doc._id
           }
         })
         .exec(function (err, doc) {

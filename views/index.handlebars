@@ -1,28 +1,37 @@
-<div class="container">
+<div class="container #f5f5f5 grey lighten-4">
 
-    <div id="wrapper">
-        <h1>Scraper Go Scraping</h1>
-        <h2><i>Check out the scrapped stuff below. Feel free to add notes!</i></h2>
-        <a class="waves-effect waves-light btn-large" href="/scrape">Scrape!</a>
+    <div class="row">
+        <h1>Scraper Go Scraping: New York Times</h1>
+        <h3><i>Check out the latest headlines from the New York Times by clicking the scrape button below. Feel free to add notes to the headlines too!</i></h3>
+        <br>
+        <a class="waves-effect waves-light btn-large" href="/scrape" onClick="refreshPage()">Scrape!</a>
+        <br>
+        <br>
+        <br>
 
         {{#each result}}
 
-        <div>
-            <a href="{{this.link}}">
-                <h4>{{this.title}}</h4>
-            </a>
+        <div class="card #fafafa grey lighten-5">
+            <div class="card-content">
+
+                <div>
+                    <a href="{{this.link}}">
+                        <h4>{{this.title}}</h4>
+                    </a>
+                </div>
+
+                <div>
+                    <a href="{{this.link}}">
+                        <h5>{{this.summary}}</h5>
+                    </a>
+                    <br>
+                    <a href="/headlines/{{this._id}}" class="waves-effect waves-light btn-large">Note</a>
+                </div>
+
+            </div>
         </div>
 
-        <div>
-            <a href="{{this.link}}">
-                <p>{{this.summary}}</p>
-            </a>
-            <br>
-            <a href="/headlines/{{this._id}}" class="waves-effect waves-light btn-large">Note</a>
-        </div>
-    </div>
-    <br>
     <br> {{/each}}
-
+    </div>
 </div>
 

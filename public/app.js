@@ -71,3 +71,6 @@ $.getJSON("/headlines", function(data) {
     $("#bodyinput").val("");
   });
   
+// function refreshPage() {
+//   window.location.reload();
+// }
